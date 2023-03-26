@@ -116,12 +116,26 @@ class CPU {
         for (let i = 0; i < this.speed; i++) {
             //instructions should only be executed when the emulator is running.
             //In out techincal reference each diffrent intruction and their opcode is mentioned
+            //hey look something like 00E0 or 9xy0 to give a few examples. So our job is to grab that opcode from memory
+            // and pass that along to another function that'll handle the execution of that instruction 
             // Read Here: http://devernay.free.fr/hacks/chip8/C8TECH10.HTM#3.1
             if(!this.paused){
+
+                //Since opcode is 16bits long and our memory is made up of 8 bit pieces So here what I am doing is
+                //shifting memory by 8 by means adding 8 zeros at the end of bit or rather adding 8 0x00
+                //this make our 8 bit piece a 16 bit memory piece and then using BITWISE OR operator to add both value and get full value of opcode
+                //e.g.  this.memory[this.pc] = 10101000, this.memory[this.pc+1] = 10111010
+                // after left shift by 8 = 1010100000000000
+                //so now after OR operator we get
+                // 1010100000000000 = 43008
+                //         10111010 = 186
+                //------------------
+                // 1010100010111010 = 43194
+
                 let opcode = (this.memory[this.pc] << 8 | this.memory[this.pc+1])
+
+                // this.executeInstuction(opcode);
             }
         }
     }
 }
-
-export default CPU;
