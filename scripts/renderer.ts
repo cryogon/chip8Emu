@@ -1,16 +1,19 @@
-/**
+/** 
  * Handles everything related to rendering
  */
 class Renderer {
-    display:Array<number>;
-    cols:number;
-    rows:number;
-    scale:number;
-    canvas:HTMLCanvasElement;
-    ctx:CanvasRenderingContext2D | null;
+    display: Array<number>;
+    cols: number;
+    rows: number;
+    scale: number;
+    /**
+   * This is for rendering all this in canvas
+   */
+    canvas: HTMLCanvasElement;
+    ctx: CanvasRenderingContext2D | null;
 
 
-    constructor(scale:number) {
+    constructor(scale: number) {
         /*Since Chip8 had 64*32 pixels of display this cols and rows are set to this */
         this.cols = 64;
         this.rows = 32;
@@ -23,20 +26,13 @@ class Renderer {
          * 1 if pixel is on and 0 if pixel is off
          */
         this.display = new Array(this.cols * this.rows);
-        /**
-         * @type {HTMLCanvasElement}
-         * This is for rendering all this in canvas
-         */
         this.canvas = document.getElementById("screen") as HTMLCanvasElement;
-        /**
-         * @type {CanvasRenderingContext2D}
-         */
         this.ctx = this.canvas.getContext("2d");
         this.canvas.width = this.cols * this.scale;
         this.canvas.height = this.rows * this.scale;
     }
 
-    setPixel(x:number, y:number) {
+    setPixel(x: number, y: number) {
         if (x > this.cols) {
             x -= this.cols;
         } else if (x < 0) {
@@ -56,7 +52,7 @@ class Renderer {
          * we just return a value to signify whether a pixel was erased or not.
          */
         this.display[pixelLoc] ^= 1;
-
+        console.log(this.display)
         return !this.display[pixelLoc];
     }
     /**
@@ -67,29 +63,29 @@ class Renderer {
     }
 
     render() {
-        if(this.ctx){
+        if (this.ctx) {
             //Clears the display every render cycle, Typically for render loop
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-            
+
             //loop through our display array
             for (let i = 0; i < this.rows * this.cols; i++) {
                 //Grabs the x position of the pixel based off 'i'
                 let x = (i % this.cols) * this.scale;
-                
+
                 //Grabs the y position of the pixel
                 let y = Math.floor(i / this.cols) * this.scale;
                 // If the value at this.display[i] == 1, then draw a pixel.
                 if (this.display[i]) {
                     // Set the pixel color to black
                     this.ctx.fillStyle = '#000';
-                    
-                // Place a pixel at position (x, y) with a width and height of scale
-                this.ctx.fillRect(x, y, this.scale, this.scale);
+
+                    // Place a pixel at position (x, y) with a width and height of scale
+                    this.ctx.fillRect(x, y, this.scale, this.scale);
+                }
             }
         }
     }
-    }
-    
+
     //For testing purpose
     testRender() {
         this.setPixel(0, 0);

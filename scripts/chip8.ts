@@ -17,7 +17,12 @@ let loop;
 /**
  * according to the technical reference, 60hz or 60 frames per second. Just like our render function, this is not Chip-8 specific and can be modified a bit to work with practically any other project.
  */
-let fps = 60,fpsInterval, startTime ,now,then,elapsed;
+let fps = 60,
+    fpsInterval: number,
+    startTime: number,
+    now: number,
+    then: number,
+    elapsed: number;
 
 function init() {
     fpsInterval = 1000 / fps;
