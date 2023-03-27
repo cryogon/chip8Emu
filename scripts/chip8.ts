@@ -7,10 +7,12 @@ Reference Used for this project is
 import Renderer from './renderer';
 import Keyboard from "./keyboard";
 import Speaker from './speaker';
+import CPU from "./cpu";
 
 const renderer = new Renderer(10);
 const keyboard = new Keyboard();
 const speaker = new Speaker();
+const cpu = new CPU(renderer,keyboard,speaker); 
 
 let loop;
 
@@ -29,20 +31,19 @@ function init() {
     then = Date.now();
     startTime = then;
 
-    // TESTING CODE. REMOVE WHEN DONE TESTING.
-    renderer.testRender();
-    renderer.render();
-    // END TESTING CODE
+    //When our emulator is initialized we will load the sprites into memory and load up the BLITZ rom. Now we just need to cycle the CPU:
+    cpu.loadSpritesIntoMemory();
+    cpu.loadRom("BLITZ");
 
     loop = requestAnimationFrame(step);
 }
-
 function step() {
     now = Date.now();
     elapsed = now - then;
 
     if (elapsed > fpsInterval) {
-        // Cycle the CPU. We'll come back to this later and fill it out.
+        // Cycle the CPU
+        cpu.cycle();
     }
 
     loop = requestAnimationFrame(step);
