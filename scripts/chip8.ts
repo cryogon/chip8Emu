@@ -33,8 +33,7 @@ function init() {
 
     //When our emulator is initialized we will load the sprites into memory and load up the BLITZ rom. Now we just need to cycle the CPU:
     cpu.loadSpritesIntoMemory();
-    cpu.loadRom("BLITZ.a");
-    console.log("Called")
+    cpu.loadRom("BLINKY.a");
 
     loop = requestAnimationFrame(step);
 }
@@ -51,4 +50,5 @@ function step() {
     loop = requestAnimationFrame(step);
 }
 
-init();
+// init();
+document.getElementById("pButton")?.addEventListener("click",init);

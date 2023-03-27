@@ -12,6 +12,7 @@ class Speaker {
         this.oscillator = null;
         //connext the gain to audio context
         this.gain.connect(this.finish);
+        
     }
     /**
      * 
