@@ -37,7 +37,6 @@ class Keyboard {
         return this.keysPressed[keyCode];
     }
     onKeyDown(event:InputEvent) {
-        console.log(event.which)
         //I know its depecated will replace it with keyName later
         let key = this.KEYMAP[event.which];
 

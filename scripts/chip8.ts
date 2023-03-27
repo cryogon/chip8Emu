@@ -33,11 +33,13 @@ function init() {
 
     //When our emulator is initialized we will load the sprites into memory and load up the BLITZ rom. Now we just need to cycle the CPU:
     cpu.loadSpritesIntoMemory();
-    cpu.loadRom("BLITZ");
+    cpu.loadRom("BLITZ.a");
+    console.log("Called")
 
     loop = requestAnimationFrame(step);
 }
 function step() {
+
     now = Date.now();
     elapsed = now - then;
 

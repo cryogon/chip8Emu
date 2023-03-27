@@ -6,9 +6,7 @@ class Speaker {
     constructor() {
 
         this.audioCtx = new window.AudioContext();
-
         //create a gain which will allow us to control the volume
-
         this.gain = this.audioCtx.createGain();
         this.finish = this.audioCtx.destination;
         this.oscillator = null;
@@ -25,6 +23,7 @@ class Speaker {
     play(frequency:number) {
         // We are creating an oscillator which is what will be playing our sound. We set its frequency, the type, connect it to the gain,
         // then finally play the sound. Nothing too crazy here.
+
 
         if (this.audioCtx && !this.oscillator) {
             this.oscillator = this.audioCtx.createOscillator();
