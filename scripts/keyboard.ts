@@ -1,8 +1,7 @@
 class Keyboard {
     KEYMAP:Object;
     keysPressed:boolean[] = [];
-    onNextKeyPress:any;
-
+    onNextKeyPress: Function | null;
     constructor() {
         //This is used to map chip8 inputs with keyboards keycode where 1 is 49 ,2 is 50 and so on
         this.KEYMAP = {
@@ -49,7 +48,7 @@ class Keyboard {
             this.onNextKeyPress = null;
         }
     }
-    onKeyUp(event) {
+    onKeyUp(event:InputEvent) {
         let key = this.KEYMAP[event.which];
         this.keysPressed[key] = false;
     }
